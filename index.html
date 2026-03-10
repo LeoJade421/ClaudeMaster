@@ -4,212 +4,204 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maîtrise Claude — Le Cours Complet</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #12121a;
-    --surface2: #1a1a28;
-    --accent: #f0e040;
-    --accent2: #ff6b4a;
-    --accent3: #7fd4ff;
-    --text: #f0ede8;
-    --muted: #888;
-    --border: rgba(255,255,255,0.08);
-    --glow: rgba(240,224,64,0.15);
+    --bg: #fffbf5;
+    --bg2: #fff8ee;
+    --surface: #ffffff;
+    --surface2: #fef3e2;
+    --accent: #f97316;
+    --accent-light: #fff3e8;
+    --accent2: #0ea5e9;
+    --accent3: #22c55e;
+    --accent4: #a855f7;
+    --text: #1e293b;
+    --text2: #475569;
+    --muted: #94a3b8;
+    --border: #e2e8f0;
+    --border2: #f1f5f9;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+    --radius: 16px;
+    --radius-sm: 10px;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; overflow-x: hidden; cursor: none; }
-
-  .cursor { width: 12px; height: 12px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.1s; mix-blend-mode: difference; }
-  .cursor-trail { width: 32px; height: 32px; border: 1.5px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.15s ease; opacity: 0.4; }
-
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,10,15,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
-  .nav-logo { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; color: var(--accent); }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent); }
-  .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 200; transition: width 0.2s; box-shadow: 0 0 12px var(--accent); }
-
+  body { background: var(--bg); color: var(--text); font-family: 'Nunito', sans-serif; overflow-x: hidden; font-size: 17px; line-height: 1.6; }
+  .progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 200; transition: width 0.2s; border-radius: 0 3px 3px 0; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 3rem; background: rgba(255,251,245,0.97); backdrop-filter: blur(16px); border-bottom: 2px solid var(--border); box-shadow: 0 2px 12px rgba(249,115,22,0.07); }
+  .nav-logo { font-size: 1.25rem; font-weight: 900; color: var(--accent); display: flex; align-items: center; gap: 0.5rem; }
+  .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+  .nav-links a { color: var(--text2); text-decoration: none; font-size: 0.88rem; font-weight: 700; padding: 0.4rem 0.9rem; border-radius: 20px; transition: all 0.2s; }
+  .nav-links a:hover { background: var(--accent-light); color: var(--accent); }
   /* HERO */
-  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 8rem 3rem 5rem; position: relative; overflow: hidden; }
-  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(240,224,64,0.06) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(127,212,255,0.05) 0%, transparent 50%); }
-  .hero-grid { position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%); }
-  .hero-tag { background: var(--accent); color: #000; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.9rem; display: inline-block; margin-bottom: 1.5rem; position: relative; z-index: 1; animation: slideIn 0.6s ease both; }
-  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(3.5rem, 9vw, 8rem); line-height: 0.95; letter-spacing: -0.03em; position: relative; z-index: 1; animation: slideIn 0.6s 0.1s ease both; max-width: 900px; }
-  .hero h1 em { font-style: italic; color: var(--accent); }
-  .hero-sub { font-size: 1.1rem; color: var(--muted); line-height: 1.7; max-width: 520px; margin-top: 1.5rem; position: relative; z-index: 1; animation: slideIn 0.6s 0.2s ease both; }
-  .hero-cta { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; position: relative; z-index: 1; animation: slideIn 0.6s 0.3s ease both; }
-  .btn-primary { background: var(--accent); color: #000; padding: 0.9rem 2rem; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--glow); }
-  .btn-secondary { background: transparent; color: var(--text); padding: 0.9rem 2rem; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; border: 1.5px solid var(--border); cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.2s, color 0.2s; }
-  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-  .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; position: relative; z-index: 1; padding-top: 2rem; border-top: 1px solid var(--border); animation: slideIn 0.6s 0.4s ease both; }
-  .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--accent); }
-  .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.2rem; }
-
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 9rem 3rem 5rem; position: relative; overflow: hidden; background: linear-gradient(135deg, #fffbf5 0%, #fff3e8 50%, #fef9f0 100%); }
+  .hero-circles { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+  .hero-circle { position: absolute; border-radius: 50%; }
+  .hc1 { width: 600px; height: 600px; right: -100px; top: -100px; background: radial-gradient(circle, rgba(249,115,22,0.12) 0%, transparent 70%); }
+  .hc2 { width: 400px; height: 400px; right: 200px; bottom: -50px; background: radial-gradient(circle, rgba(14,165,233,0.1) 0%, transparent 70%); }
+  .hc3 { width: 300px; height: 300px; left: -80px; bottom: 100px; background: radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 70%); }
+  .hero-badge { background: linear-gradient(135deg, var(--accent), #fb923c); color: white; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.04em; padding: 0.5rem 1.3rem; border-radius: 30px; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.8rem; position: relative; z-index: 1; animation: bounceIn 0.7s ease both; box-shadow: 0 4px 15px rgba(249,115,22,0.35); }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1.05; letter-spacing: -0.02em; position: relative; z-index: 1; animation: slideUp 0.7s 0.1s ease both; max-width: 800px; color: var(--text); }
+  .hero h1 .highlight { color: var(--accent); font-style: italic; position: relative; }
+  .hero h1 .highlight::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 6px; background: rgba(249,115,22,0.2); border-radius: 3px; z-index: -1; }
+  .hero-sub { font-size: 1.2rem; color: var(--text2); line-height: 1.75; max-width: 560px; margin-top: 1.8rem; position: relative; z-index: 1; animation: slideUp 0.7s 0.2s ease both; font-weight: 600; }
+  .hero-cta { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; position: relative; z-index: 1; animation: slideUp 0.7s 0.3s ease both; }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), #ea6f0c); color: white; padding: 1rem 2.2rem; font-weight: 800; font-size: 1rem; border-radius: var(--radius-sm); border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 20px rgba(249,115,22,0.4); font-family: 'Nunito', sans-serif; }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(249,115,22,0.5); }
+  .btn-secondary { background: white; color: var(--accent); padding: 1rem 2.2rem; font-weight: 800; font-size: 1rem; border-radius: var(--radius-sm); border: 2px solid var(--accent); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; font-family: 'Nunito', sans-serif; }
+  .btn-secondary:hover { background: var(--accent-light); transform: translateY(-2px); }
+  .hero-stats { display: flex; gap: 1.5rem; margin-top: 4rem; position: relative; z-index: 1; animation: slideUp 0.7s 0.4s ease both; flex-wrap: wrap; }
+  .stat-card { background: white; padding: 1.2rem 1.8rem; border-radius: var(--radius); box-shadow: var(--shadow); display: flex; align-items: center; gap: 1rem; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--accent); font-weight: 700; line-height: 1; }
+  .stat-label { font-size: 0.78rem; color: var(--text2); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-icon { font-size: 1.8rem; }
+  /* TICKER */
+  .ticker-wrap { background: linear-gradient(135deg, var(--accent), #fb923c); overflow: hidden; padding: 0.9rem 0; }
+  .ticker { display: flex; gap: 3rem; animation: ticker 35s linear infinite; white-space: nowrap; }
+  .ticker span { font-size: 0.85rem; font-weight: 800; color: white; display: flex; align-items: center; gap: 0.8rem; }
+  .ticker span::after { content: '⭐'; font-size: 0.7rem; }
   /* SECTIONS */
   section { padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; }
-  .section-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-  .section-label::before { content: ''; display: block; width: 2rem; height: 2px; background: var(--accent); }
-  h2 { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
-  h2 em { font-style: italic; color: var(--accent); }
-  .section-intro { font-size: 1.05rem; color: var(--muted); line-height: 1.7; max-width: 600px; margin-bottom: 3rem; }
-
-  /* MODULES GRID */
-  .modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5px; background: var(--border); }
-  .module-card { background: var(--surface); padding: 2rem; position: relative; overflow: hidden; cursor: pointer; transition: background 0.3s; }
-  .module-card:hover { background: var(--surface2); }
-  .module-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--accent) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; }
-  .module-card:hover::before { opacity: 0.04; }
-  .module-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); font-weight: 500; margin-bottom: 1rem; letter-spacing: 0.1em; }
-  .module-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.3; }
-  .module-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
-  .module-tag { display: inline-block; margin-top: 1.2rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.7rem; border: 1px solid var(--border); color: var(--muted); }
-  .module-tag.beginner { border-color: rgba(127,212,255,0.4); color: var(--accent3); }
-  .module-tag.intermediate { border-color: rgba(240,224,64,0.4); color: var(--accent); }
-  .module-tag.advanced { border-color: rgba(255,107,74,0.4); color: var(--accent2); }
-  .level-dots { display: flex; gap: 4px; margin-top: 0.8rem; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
-  .dot.filled { background: var(--accent); }
-
-  /* MODULE TABS NAV */
-  .module-tabs-wrap { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 62px; z-index: 80; overflow-x: auto; }
-  .module-tabs { display: flex; min-width: max-content; }
-  .module-tab { padding: 1rem 1.5rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; font-family: 'Syne', sans-serif; }
+  .section-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent-light); color: var(--accent); font-size: 0.82rem; font-weight: 800; padding: 0.4rem 1.1rem; border-radius: 20px; margin-bottom: 1.2rem; border: 1.5px solid rgba(249,115,22,0.2); }
+  h2.section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.15; margin-bottom: 1rem; color: var(--text); }
+  h2.section-title em { font-style: italic; color: var(--accent); }
+  .section-intro { font-size: 1.05rem; color: var(--text2); line-height: 1.75; max-width: 620px; margin-bottom: 3rem; font-weight: 600; }
+  /* MODULES */
+  .modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+  .module-card { background: white; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; border: 2px solid transparent; position: relative; overflow: hidden; }
+  .module-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; border-radius: var(--radius) var(--radius) 0 0; }
+  .module-card.m1::before { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+  .module-card.m2::before { background: linear-gradient(90deg, var(--accent), #fb923c); }
+  .module-card.m3::before { background: linear-gradient(90deg, #22c55e, #4ade80); }
+  .module-card.m4::before { background: linear-gradient(90deg, #a855f7, #c084fc); }
+  .module-card.m5::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .module-card.m6::before { background: linear-gradient(90deg, #ec4899, #f472b6); }
+  .module-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .module-emoji { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+  .module-num { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+  .module-card h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 0.7rem; color: var(--text); }
+  .module-card p { font-size: 0.95rem; color: var(--text2); line-height: 1.65; font-weight: 600; }
+  .module-tag { display: inline-block; margin-top: 1.2rem; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.05em; padding: 0.3rem 0.9rem; border-radius: 20px; }
+  .module-tag.beginner { background: #dcfce7; color: #16a34a; }
+  .module-tag.intermediate { background: #fff3e8; color: #ea6f0c; }
+  .module-tag.advanced { background: #f3e8ff; color: #9333ea; }
+  /* TABS */
+  .module-tabs-wrap { background: white; border-bottom: 2px solid var(--border); position: sticky; top: 68px; z-index: 80; overflow-x: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+  .module-tabs { display: flex; min-width: max-content; padding: 0 1.5rem; }
+  .module-tab { padding: 1.1rem 1.5rem; font-size: 0.85rem; font-weight: 800; cursor: pointer; color: var(--muted); border-bottom: 3px solid transparent; transition: all 0.2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; font-family: 'Nunito', sans-serif; margin-bottom: -2px; }
   .module-tab:hover { color: var(--text); }
   .module-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-  /* MODULE PANELS */
-  .module-panel { display: none; }
+  .module-panel { display: none; background: var(--bg); }
   .module-panel.active { display: block; }
-
-  /* MODULE HEADER */
   .module-header { padding: 4rem 3rem 2rem; max-width: 900px; margin: 0 auto; }
-  .module-header-tag { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-  .module-big-num { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--accent); font-weight: 500; letter-spacing: 0.15em; }
-  .module-header h2 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin-bottom: 1rem; }
+  .module-header-tag { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .module-big-num { font-size: 0.78rem; font-weight: 800; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; background: var(--border2); padding: 0.3rem 0.9rem; border-radius: 20px; }
+  .module-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.2; margin-bottom: 1rem; color: var(--text); }
   .module-header h2 em { font-style: italic; color: var(--accent); }
-  .module-header p { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 600px; }
-
+  .module-header p { font-size: 1.05rem; color: var(--text2); line-height: 1.8; max-width: 620px; font-weight: 600; }
   /* LESSONS */
-  .lessons-wrap { max-width: 900px; margin: 0 auto; padding: 0 3rem 2rem; }
-  .lesson { border-bottom: 1px solid var(--border); overflow: hidden; }
-  .lesson-header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; cursor: pointer; transition: color 0.2s; }
-  .lesson-header:hover { color: var(--accent); }
-  .lesson-header h4 { font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 1rem; }
-  .lesson-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); min-width: 40px; }
-  .lesson-toggle { font-size: 1.5rem; color: var(--muted); transition: transform 0.3s; }
-  .lesson.open .lesson-toggle { transform: rotate(45deg); color: var(--accent); }
+  .lessons-wrap { max-width: 900px; margin: 0 auto; padding: 0 3rem 3rem; }
+  .lesson { background: white; border-radius: var(--radius); margin-bottom: 1rem; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 2px solid transparent; transition: border-color 0.2s; }
+  .lesson.open { border-color: var(--accent); }
+  .lesson-header { display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 1.8rem; cursor: pointer; transition: background 0.2s; }
+  .lesson-header:hover { background: var(--bg2); }
+  .lesson-header h4 { font-size: 1.02rem; font-weight: 800; display: flex; align-items: center; gap: 0.8rem; color: var(--text); }
+  .lesson-num { font-size: 0.72rem; font-weight: 800; color: white; background: var(--accent); padding: 0.2rem 0.6rem; border-radius: 6px; }
+  .lesson-toggle { font-size: 1.8rem; color: var(--accent); transition: transform 0.3s; font-weight: 700; line-height: 1; }
+  .lesson.open .lesson-toggle { transform: rotate(45deg); }
   .lesson-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
-  .lesson.open .lesson-body { max-height: 1200px; }
-  .lesson-content { padding-bottom: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .lesson-text { font-size: 0.92rem; color: var(--muted); line-height: 1.75; }
+  .lesson.open .lesson-body { max-height: 1400px; }
+  .lesson-content { padding: 1.5rem 1.8rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; border-top: 2px solid var(--border2); }
+  .lesson-text { font-size: 0.97rem; color: var(--text2); line-height: 1.8; font-weight: 600; }
   .lesson-text strong { color: var(--text); }
-  .lesson-text ul { margin-top: 1rem; padding-left: 1.2rem; }
-  .lesson-text li { margin-bottom: 0.5rem; }
+  .lesson-text ul { margin-top: 0.8rem; padding-left: 1.4rem; }
+  .lesson-text li { margin-bottom: 0.55rem; }
   .lesson-text p + p { margin-top: 0.8rem; }
-
-  /* PROMPT CARDS */
-  .prompt-example { background: var(--surface2); border: 1px solid var(--border); padding: 1.2rem; border-left: 3px solid var(--accent); position: relative; }
-  .prompt-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
-  .prompt-text { font-family: 'DM Mono', monospace; font-size: 0.78rem; line-height: 1.7; color: var(--text); white-space: pre-wrap; }
-  .copy-btn { position: absolute; top: 0.8rem; right: 0.8rem; background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 0.25rem 0.6rem; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; font-family: 'Syne', sans-serif; transition: all 0.2s; }
-  .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .copy-btn.copied { border-color: #4ade80; color: #4ade80; }
+  /* PROMPTS */
   .prompt-stack { display: flex; flex-direction: column; gap: 1rem; }
-
-  /* HIGHLIGHT */
-  .highlight-box { background: linear-gradient(135deg, rgba(240,224,64,0.07), rgba(240,224,64,0.02)); border: 1px solid rgba(240,224,64,0.2); padding: 1.2rem 1.5rem; margin-top: 1rem; position: relative; }
-  .highlight-box::before { content: '💡'; position: absolute; top: -0.8rem; left: 1.2rem; background: var(--bg); padding: 0 0.4rem; font-size: 0.9rem; }
-  .highlight-box p { font-size: 0.88rem; color: var(--text); line-height: 1.65; }
-  .warning-box { background: rgba(255,107,74,0.07); border: 1px solid rgba(255,107,74,0.2); padding: 1.2rem 1.5rem; margin-top: 1rem; position: relative; }
-  .warning-box::before { content: '⚠️'; position: absolute; top: -0.8rem; left: 1.2rem; background: var(--bg); padding: 0 0.4rem; font-size: 0.9rem; }
-  .warning-box p { font-size: 0.88rem; color: #ffb39a; line-height: 1.65; }
-
+  .prompt-example { background: linear-gradient(135deg, #fff8ee, #fff3e0); border: 2px solid rgba(249,115,22,0.2); padding: 1.3rem; border-radius: var(--radius-sm); position: relative; }
+  .prompt-label { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.7rem; display: flex; align-items: center; gap: 0.4rem; }
+  .prompt-text { font-family: 'Source Code Pro', monospace; font-size: 0.82rem; line-height: 1.75; color: var(--text); white-space: pre-wrap; background: rgba(255,255,255,0.8); padding: 0.8rem; border-radius: 8px; border: 1px solid rgba(249,115,22,0.1); }
+  .copy-btn { margin-top: 0.8rem; background: var(--accent); border: none; color: white; padding: 0.55rem 1.3rem; font-size: 0.8rem; font-weight: 800; border-radius: 20px; cursor: pointer; font-family: 'Nunito', sans-serif; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; }
+  .copy-btn:hover { background: #ea6f0c; transform: scale(1.05); }
+  .copy-btn.copied { background: var(--accent3); }
+  /* BOXES */
+  .highlight-box { background: linear-gradient(135deg, #fef9c3, #fef3c7); border: 2px solid #fbbf24; padding: 1.2rem 1.4rem; border-radius: var(--radius-sm); margin-top: 1rem; position: relative; }
+  .highlight-box::before { content: '💡 Astuce'; font-size: 0.68rem; font-weight: 800; color: #92400e; position: absolute; top: -0.8rem; left: 1rem; background: #fef9c3; padding: 0.1rem 0.6rem; border-radius: 10px; border: 1.5px solid #fbbf24; letter-spacing: 0.05em; text-transform: uppercase; }
+  .highlight-box p { font-size: 0.93rem; color: #78350f; line-height: 1.7; font-weight: 600; }
+  .warning-box { background: linear-gradient(135deg, #fef2f2, #fee2e2); border: 2px solid #fca5a5; padding: 1.2rem 1.4rem; border-radius: var(--radius-sm); margin-top: 1rem; position: relative; }
+  .warning-box::before { content: '⚠️ Attention'; font-size: 0.68rem; font-weight: 800; color: #991b1b; position: absolute; top: -0.8rem; left: 1rem; background: #fef2f2; padding: 0.1rem 0.6rem; border-radius: 10px; border: 1.5px solid #fca5a5; letter-spacing: 0.05em; text-transform: uppercase; }
+  .warning-box p { font-size: 0.93rem; color: #7f1d1d; line-height: 1.7; font-weight: 600; }
   /* QUIZ */
-  .quiz-section { background: var(--surface); border: 1px solid var(--border); padding: 2.5rem; margin: 3rem 0; position: relative; }
-  .quiz-section::before { content: 'QUIZ'; position: absolute; top: -0.8rem; left: 2rem; background: var(--accent2); color: #000; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.15em; padding: 0.2rem 0.8rem; }
-  .quiz-question { font-size: 1.05rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.4; }
-  .quiz-options { display: flex; flex-direction: column; gap: 0.75rem; }
-  .quiz-option { background: var(--bg); border: 1px solid var(--border); padding: 0.9rem 1.2rem; cursor: pointer; font-size: 0.88rem; font-weight: 600; transition: all 0.2s; text-align: left; color: var(--text); display: flex; align-items: center; gap: 1rem; font-family: 'Syne', sans-serif; }
-  .quiz-option:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
-  .quiz-option.correct { border-color: #4ade80; color: #4ade80; background: rgba(74,222,128,0.05); }
-  .quiz-option.wrong { border-color: var(--accent2); color: var(--accent2); background: rgba(255,107,74,0.05); }
-  .quiz-opt-letter { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); min-width: 18px; }
-  .quiz-feedback { margin-top: 1.5rem; padding: 1rem 1.2rem; font-size: 0.88rem; font-weight: 600; display: none; line-height: 1.5; }
+  .quiz-section { background: linear-gradient(135deg, #fff8ee, #fef3e2); border: 2.5px solid rgba(249,115,22,0.3); padding: 2.5rem; border-radius: var(--radius); margin: 2.5rem 0; position: relative; }
+  .quiz-badge { position: absolute; top: -1rem; left: 2rem; background: linear-gradient(135deg, var(--accent2), #38bdf8); color: white; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; padding: 0.3rem 1rem; border-radius: 20px; text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem; }
+  .quiz-question { font-size: 1.05rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.5; color: var(--text); margin-top: 0.5rem; }
+  .quiz-options { display: flex; flex-direction: column; gap: 0.8rem; }
+  .quiz-option { background: white; border: 2px solid var(--border); padding: 1rem 1.4rem; cursor: pointer; font-size: 0.97rem; font-weight: 700; transition: all 0.2s; text-align: left; color: var(--text); display: flex; align-items: center; gap: 1rem; font-family: 'Nunito', sans-serif; border-radius: var(--radius-sm); }
+  .quiz-option:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-light); color: var(--accent); transform: translateX(4px); }
+  .quiz-option.correct { border-color: var(--accent3); color: #15803d; background: #f0fdf4; }
+  .quiz-option.wrong { border-color: #f87171; color: #dc2626; background: #fef2f2; }
+  .quiz-opt-letter { font-size: 0.85rem; font-weight: 900; color: white; background: var(--muted); min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .quiz-option.correct .quiz-opt-letter { background: var(--accent3); }
+  .quiz-option.wrong .quiz-opt-letter { background: #f87171; }
+  .quiz-feedback { margin-top: 1.5rem; padding: 1.2rem 1.5rem; font-size: 0.97rem; font-weight: 700; display: none; border-radius: var(--radius-sm); line-height: 1.6; }
   .quiz-feedback.show { display: block; }
-  .quiz-feedback.good { background: rgba(74,222,128,0.08); border-left: 3px solid #4ade80; color: #4ade80; }
-  .quiz-feedback.bad { background: rgba(255,107,74,0.08); border-left: 3px solid var(--accent2); color: #ffb39a; }
-
-  /* TICKER */
-  .ticker-wrap { background: var(--accent); overflow: hidden; padding: 0.75rem 0; }
-  .ticker { display: flex; gap: 4rem; animation: ticker 35s linear infinite; white-space: nowrap; }
-  .ticker span { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #000; display: flex; align-items: center; gap: 0.8rem; }
-  .ticker span::after { content: '✦'; }
-
-  /* TECHNIQUES GRID */
-  .techniques-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-  .technique-card { background: var(--surface); border: 1px solid var(--border); padding: 1.8rem; transition: border-color 0.3s, transform 0.3s; }
-  .technique-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-  .technique-icon { font-size: 2rem; margin-bottom: 1rem; }
-  .technique-card h4 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; }
-  .technique-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
-  .technique-card .prompt-text { margin-top: 1rem; font-size: 0.74rem; }
-
+  .quiz-feedback.good { background: #f0fdf4; border: 2px solid var(--accent3); color: #15803d; }
+  .quiz-feedback.bad { background: #fef2f2; border: 2px solid #f87171; color: #dc2626; }
+  /* TECHNIQUES */
+  .techniques-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+  .technique-card { background: white; border: 2px solid var(--border); padding: 1.8rem; border-radius: var(--radius); transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+  .technique-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+  .technique-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+  .technique-card h4 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text); }
+  .technique-card p { font-size: 0.88rem; color: var(--text2); line-height: 1.65; font-weight: 600; }
+  .technique-card .prompt-text { margin-top: 0.8rem; font-size: 0.76rem; padding: 0.6rem; background: var(--bg2); border-radius: 8px; border: 1px solid var(--border); }
   /* CHEATSHEET */
-  .cheatsheet { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 3rem; }
-  .cheat-item { background: var(--surface); padding: 1.5rem; }
-  .cheat-item h5 { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 0.6rem; }
-  .cheat-item p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
-
+  .cheatsheet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.5rem; }
+  .cheat-item { background: white; padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 2px solid var(--border); transition: border-color 0.2s, transform 0.2s; }
+  .cheat-item:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .cheat-item h5 { font-size: 0.88rem; font-weight: 800; color: var(--accent); margin-bottom: 0.6rem; }
+  .cheat-item p { font-size: 0.87rem; color: var(--text2); line-height: 1.6; font-weight: 600; font-style: italic; }
   /* FOOTER */
-  footer { border-top: 1px solid var(--border); padding: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-logo { font-size: 1.1rem; font-weight: 800; color: var(--accent); }
-  .footer-note { font-size: 0.8rem; color: var(--muted); }
-
-  /* FLOATING */
-  .floating-badge { position: fixed; bottom: 2rem; right: 2rem; z-index: 50; background: var(--accent); color: #000; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; cursor: pointer; animation: float 3s ease-in-out infinite; box-shadow: 0 4px 20px var(--glow); text-decoration: none; font-weight: 800; }
-
-  /* ANIMATIONS */
-  @keyframes slideIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* PROGRESS TRACKER */
-  .module-progress { display: flex; align-items: center; gap: 1rem; padding: 1rem 3rem; background: var(--surface); border-bottom: 1px solid var(--border); max-width: none; }
-  .progress-steps { display: flex; gap: 0.4rem; }
-  .progress-step { width: 6px; height: 6px; border-radius: 50%; background: var(--border); transition: background 0.3s; }
-  .progress-step.done { background: var(--accent); }
-  .progress-label { font-size: 0.75rem; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
-
+  footer { background: #1e293b; color: #94a3b8; padding: 3.5rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+  .footer-logo { font-size: 1.3rem; font-weight: 900; color: var(--accent); }
+  .footer-note { font-size: 0.88rem; color: #64748b; line-height: 1.6; font-weight: 600; }
+  .floating-badge { position: fixed; bottom: 2rem; right: 2rem; z-index: 50; background: linear-gradient(135deg, var(--accent), #fb923c); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; cursor: pointer; animation: float 3s ease-in-out infinite; box-shadow: 0 6px 25px rgba(249,115,22,0.45); text-decoration: none; font-weight: 900; border: 3px solid white; }
+  .section-divider { height: 6px; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3), var(--accent4), var(--accent)); background-size: 300% 100%; animation: gradientShift 6s ease infinite; }
+  .congrats-box { text-align: center; padding: 3.5rem; background: linear-gradient(135deg, #fff8ee, #fef3e2); border: 3px solid rgba(249,115,22,0.3); border-radius: var(--radius); margin: 2rem 0; }
+  @keyframes slideUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes bounceIn { 0% { opacity:0; transform:scale(0.5); } 70% { transform:scale(1.1); } 100% { opacity:1; transform:scale(1); } }
+  @keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+  @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+  @keyframes gradientShift { 0%,100% { background-position:0% 50%; } 50% { background-position:100% 50%; } }
+  .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
     .hero { padding: 7rem 1.5rem 4rem; }
-    section { padding: 3rem 1.5rem; }
-    .module-header { padding: 2rem 1.5rem 1rem; }
-    .lessons-wrap { padding: 0 1.5rem 2rem; }
+    section { padding: 3.5rem 1.5rem; }
+    .module-header { padding: 2rem 1.5rem 1.5rem; }
+    .lessons-wrap { padding: 0 1.5rem 2.5rem; }
     .lesson-content { grid-template-columns: 1fr; }
-    .cheatsheet { grid-template-columns: 1fr; }
-    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
-    footer { padding: 2rem 1.5rem; flex-direction: column; }
+    .cheatsheet-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1rem; }
+    footer { padding: 2.5rem 1.5rem; flex-direction: column; }
     .modules-grid { grid-template-columns: 1fr; }
+    .techniques-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-trail" id="cursorTrail"></div>
+
+
 <div class="progress-bar" id="progressBar"></div>
 
 <nav>
-  <div class="nav-logo">◆ CLAUDE MASTER</div>
+  <div class="nav-logo">🤖 Claude Master</div>
   <ul class="nav-links">
     <li><a href="#modules">Modules</a></li>
     <li><a href="#lecons">Leçons</a></li>
@@ -220,24 +212,28 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-tag">Cours Interactif — 2025</div>
-  <h1>Maîtrise<br><em>Claude</em><br>à 100%</h1>
-  <p class="hero-sub">De zéro à expert. Apprenez à formuler des prompts parfaits, débloquer les capacités cachées et transformer Claude en super-pouvoir quotidien.</p>
+  <div class="hero-circles">
+    <div class="hero-circle hc1"></div>
+    <div class="hero-circle hc2"></div>
+    <div class="hero-circle hc3"></div>
+  </div>
+  <div class="hero-badge">✨ Cours Interactif Complet — 2025</div>
+  <h1>Maîtrisez <span class="highlight">Claude</span><br>à 100 %</h1>
+  <p class="hero-sub">De zéro à expert en 6 modules. Apprenez à formuler des questions parfaites et transformez Claude en assistant personnel ultra-puissant !</p>
   <div class="hero-cta">
-    <a href="#lecons" class="btn-primary">Commencer le cours →</a>
-    <a href="#cheatsheet" class="btn-secondary">Voir la Cheatsheet</a>
+    <a href="#lecons" class="btn-primary">🚀 Commencer le cours</a>
+    <a href="#cheatsheet" class="btn-secondary">📋 Voir la Cheatsheet</a>
   </div>
   <div class="hero-stats">
-    <div><div class="stat-num">6</div><div class="stat-label">Modules</div></div>
-    <div><div class="stat-num">28</div><div class="stat-label">Leçons</div></div>
-    <div><div class="stat-num">6</div><div class="stat-label">Quiz</div></div>
-    <div><div class="stat-num">∞</div><div class="stat-label">Possibilités</div></div>
+    <div class="stat-card"><div class="stat-icon">📚</div><div><div class="stat-num">6</div><div class="stat-label">Modules</div></div></div>
+    <div class="stat-card"><div class="stat-icon">🎓</div><div><div class="stat-num">28</div><div class="stat-label">Leçons</div></div></div>
+    <div class="stat-card"><div class="stat-icon">🧠</div><div><div class="stat-num">6</div><div class="stat-label">Quiz</div></div></div>
+    <div class="stat-card"><div class="stat-icon">📋</div><div><div class="stat-num">30+</div><div class="stat-label">Prompts prêts</div></div></div>
   </div>
 </div>
 
 <!-- TICKER -->
+<div class="section-divider"></div>
 <div class="ticker-wrap">
   <div class="ticker">
     <span>Prompts Puissants</span><span>Roleplay & Personas</span><span>Code & Debug</span><span>Analyse de Données</span><span>Créativité Augmentée</span><span>Raisonnement Avancé</span><span>Synthèse de Documents</span><span>Brainstorming Expert</span><span>Workflows Automatisés</span><span>Éthique IA</span>
@@ -247,68 +243,70 @@
 
 <!-- MODULES OVERVIEW -->
 <section id="modules">
-  <div class="section-label">Curriculum</div>
-  <h2>Les 6 <em>Modules</em></h2>
+  <div class="section-badge">Curriculum</div>
+  <h2 class="section-title">Les 6 <em>Modules</em></h2>
   <p class="section-intro">Un parcours progressif de débutant à expert. Chaque module enrichit le précédent.</p>
   <div class="modules-grid reveal">
-    <div class="module-card" onclick="goToModule(0)">
+    <div class="module-card m1" onclick="goToModule(0)"><span class="module-emoji">🔍</span>
       <div class="module-num">MODULE 01</div>
       <h3>Comprendre Claude</h3>
       <p>Qui est Claude ? Comment fonctionne-t-il ? Ses forces, ses limites, et ce qui le rend unique.</p>
-      <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;"><span class="module-tag beginner">Débutant</span><div class="level-dots"><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;"><span class="module-tag beginner">🟢 Débutant</span><div class="level-dots"><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
     </div>
-    <div class="module-card" onclick="goToModule(1)">
+    <div class="module-card m2" onclick="goToModule(1)"><span class="module-emoji">✍️</span>
       <div class="module-num">MODULE 02</div>
       <h3>L'Art du Prompt</h3>
       <p>La structure d'un prompt parfait, les erreurs à éviter, les formules qui fonctionnent toujours.</p>
-      <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;"><span class="module-tag beginner">Débutant</span><div class="level-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+      <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;"><span class="module-tag beginner">🟢 Débutant</span><div class="level-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
     </div>
-    <div class="module-card" onclick="goToModule(2)">
+    <div class="module-card m3" onclick="goToModule(2)"><span class="module-emoji">💼</span>
       <div class="module-num">MODULE 03</div>
       <h3>Cas d'Usage Concrets</h3>
       <p>Écriture, code, analyse, créativité, productivité. Des workflows complets pour chaque situation.</p>
-      <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;"><span class="module-tag intermediate">Intermédiaire</span><div class="level-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+      <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;"><span class="module-tag intermediate">🟡 Intermédiaire</span><div class="level-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
     </div>
-    <div class="module-card" onclick="goToModule(3)">
+    <div class="module-card m4" onclick="goToModule(3)"><span class="module-emoji">🚀</span>
       <div class="module-num">MODULE 04</div>
       <h3>Techniques Avancées</h3>
       <p>Chain-of-thought, personas, méta-prompts, décomposition. Les techniques des experts.</p>
-      <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;"><span class="module-tag advanced">Avancé</span><div class="level-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></div>
+      <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;"><span class="module-tag advanced">🔴 Avancé</span><div class="level-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></div>
     </div>
-    <div class="module-card" onclick="goToModule(4)">
+    <div class="module-card m5" onclick="goToModule(4)"><span class="module-emoji">⚙️</span>
       <div class="module-num">MODULE 05</div>
       <h3>Workflows & Automatisation</h3>
       <p>Créez des systèmes de prompts enchaînés, vos templates personnels, industrialisez votre productivité.</p>
-      <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;"><span class="module-tag advanced">Avancé</span><div class="level-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></div>
+      <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;"><span class="module-tag advanced">🔴 Avancé</span><div class="level-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></div>
     </div>
-    <div class="module-card" onclick="goToModule(5)">
+    <div class="module-card m6" onclick="goToModule(5)"><span class="module-emoji">🛡️</span>
       <div class="module-num">MODULE 06</div>
       <h3>Éthique & Meilleures Pratiques</h3>
       <p>Utiliser Claude de façon responsable, comprendre ses valeurs et en tirer le meilleur parti.</p>
-      <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;"><span class="module-tag intermediate">Intermédiaire</span><div class="level-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+      <div style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;"><span class="module-tag intermediate">🟡 Intermédiaire</span><div class="level-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
     </div>
   </div>
 </section>
+
+<div class="section-divider"></div>
 
 <!-- LEÇONS -->
 <div id="lecons">
   <!-- MODULE TABS -->
   <div class="module-tabs-wrap">
     <div class="module-tabs">
-      <button class="module-tab active" onclick="switchModule(0)">01 — Comprendre Claude</button>
-      <button class="module-tab" onclick="switchModule(1)">02 — Art du Prompt</button>
-      <button class="module-tab" onclick="switchModule(2)">03 — Cas d'Usage</button>
-      <button class="module-tab" onclick="switchModule(3)">04 — Techniques Avancées</button>
-      <button class="module-tab" onclick="switchModule(4)">05 — Workflows</button>
-      <button class="module-tab" onclick="switchModule(5)">06 — Éthique</button>
+      <button class="module-tab active" onclick="switchModule(0)">🔍 Module 01 — Comprendre</button>
+      <button class="module-tab" onclick="switchModule(1)">✍️ Module 02 — Prompt</button>
+      <button class="module-tab" onclick="switchModule(2)">💼 Module 03 — Usages</button>
+      <button class="module-tab" onclick="switchModule(3)">🚀 Module 04 — Avancé</button>
+      <button class="module-tab" onclick="switchModule(4)">⚙️ Module 05 — Workflows</button>
+      <button class="module-tab" onclick="switchModule(5)">🛡️ Module 06 — Éthique</button>
     </div>
   </div>
 
   <!-- ═══════════════════ MODULE 01 ═══════════════════ -->
   <div class="module-panel active" id="panel-0">
     <div class="module-header">
-      <div class="module-header-tag"><span class="module-big-num">MODULE 01 / 06</span><span class="module-tag beginner">Débutant</span></div>
-      <h2>Comprendre <em>Claude</em></h2>
+      <div class="module-header-tag"><span class="module-big-num">MODULE 01 / 06</span><span class="module-tag beginner">🟢 Débutant</span></div>
+      <h2 class="section-title">Comprendre <em>Claude</em></h2>
       <p>Avant d'utiliser un outil, il faut le comprendre. Ce module pose les bases : ce qu'est Claude, comment il pense, où il excelle et où il échoue. Un investissement de 15 minutes qui changera toute votre façon d'interagir avec lui.</p>
     </div>
     <div class="lessons-wrap">
@@ -334,12 +332,12 @@
             <div class="prompt-example">
               <div class="prompt-label">Prompt de Découverte</div>
               <div class="prompt-text">Explique-moi en 5 points ce que tu es capable de faire, et en 3 points ce que tu ne sais pas faire. Sois honnête et précis.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Prompt de Test</div>
               <div class="prompt-text">Quelle est ta date limite de connaissance ? Sur quels sujets risques-tu le plus de faire des erreurs ? Donne-moi des exemples concrets.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -366,7 +364,7 @@
             <div class="prompt-example">
               <div class="prompt-label">Comprendre le Contexte</div>
               <div class="prompt-text">Je vais te donner du contexte sur ma situation, puis ma question. CONTEXTE : Je suis chef de projet dans une PME de 50 personnes, secteur logistique, pas de département IT dédié. QUESTION : Quels outils IA puis-je adopter facilement sans compétences techniques ?</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -401,12 +399,12 @@
             <div class="prompt-example">
               <div class="prompt-label">Tester les Forces</div>
               <div class="prompt-text">Voici un texte que j'ai écrit : [coller votre texte]. Analyse-le sur 4 axes : clarté, structure, ton, impact. Donne une note sur 10 pour chaque axe et dis-moi comment améliorer les deux axes les plus faibles.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Vérifier les Limites</div>
               <div class="prompt-text">Sur ce sujet [votre sujet], qu'est-ce que tu ne sais pas avec certitude ? Quelles informations devrais-je aller vérifier ailleurs ?</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -432,7 +430,7 @@
             <div class="prompt-example">
               <div class="prompt-label">Reformuler après un Refus</div>
               <div class="prompt-text">Je comprends que tu ne peux pas répondre directement à ma question précédente. Mon contexte est le suivant : [expliquer votre raison légitime]. Dans ce cadre, peux-tu m'aider avec [reformulation de la demande] ?</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -440,7 +438,8 @@
 
       <!-- QUIZ M01 -->
       <div class="quiz-section">
-        <div class="quiz-question">🧠 Quiz Module 01 — Claude peut-il accéder à Internet en temps réel pour répondre à vos questions ?</div>
+        <div class="quiz-badge">🧠 Quiz du Module</div>
+        <div class="quiz-question"> Claude peut-il accéder à Internet en temps réel pour répondre à vos questions ?</div>
         <div class="quiz-options">
           <button class="quiz-option" onclick="checkAnswer(this,true,'q01')"><span class="quiz-opt-letter">A</span>Non, il génère des réponses basées sur son entraînement, pas sur Internet en temps réel</button>
           <button class="quiz-option" onclick="checkAnswer(this,false,'q01')"><span class="quiz-opt-letter">B</span>Oui, il consulte Internet à chaque réponse</button>
@@ -456,8 +455,8 @@
   <!-- ═══════════════════ MODULE 02 ═══════════════════ -->
   <div class="module-panel" id="panel-1">
     <div class="module-header">
-      <div class="module-header-tag"><span class="module-big-num">MODULE 02 / 06</span><span class="module-tag beginner">Débutant</span></div>
-      <h2>L'Art du <em>Prompt</em></h2>
+      <div class="module-header-tag"><span class="module-big-num">MODULE 02 / 06</span><span class="module-tag beginner">🟢 Débutant</span></div>
+      <h2 class="section-title">L'Art du <em>Prompt</em></h2>
       <p>Le prompt est votre interface avec Claude. Un bon prompt fait la différence entre une réponse médiocre et une réponse exceptionnelle. Ce module vous donne toutes les clés pour construire des prompts qui délivrent à chaque fois.</p>
     </div>
     <div class="lessons-wrap">
@@ -482,14 +481,14 @@
             <div class="prompt-example">
               <div class="prompt-label">❌ Prompt Pauvre</div>
               <div class="prompt-text">Écris un email sur notre nouveau produit.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">✅ Prompt avec les 3 Piliers</div>
               <div class="prompt-text">CONTEXTE : Je suis directeur marketing d'une startup SaaS B2B. Notre nouveau produit est un outil d'analyse de données RH. Audience : DRH de PME 50-500 personnes, peu tech-savvy.
 INSTRUCTION : Rédige un email d'annonce du lancement.
 FORMAT : Objet accrocheur, corps en 3 paragraphes max (problème → solution → CTA), ton professionnel mais accessible, 150 mots max.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -515,12 +514,12 @@ FORMAT : Objet accrocheur, corps en 3 paragraphes max (problème → solution �
             <div class="prompt-example">
               <div class="prompt-label">Rôle Expert Métier</div>
               <div class="prompt-text">Tu es un avocat spécialisé en droit du travail français, avec 20 ans d'expérience. Tu es reconnu pour expliquer les situations légales complexes en termes simples. Tu es précis et tu signales toujours quand une situation nécessite une consultation réelle.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Rôle Coach Critique</div>
               <div class="prompt-text">Tu es un coach business brutal et bienveillant. Tu ne dis pas ce que les gens veulent entendre, tu dis ce dont ils ont besoin. Tu repères les angles morts, les illusions et les pièges. Analyse mon business plan [coller le plan] sans ménagement.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -557,7 +556,7 @@ Input: "Livraison en 2h"
 Output: "Commandé à 10h. Livré avant le déjeuner."
 
 Maintenant transforme : "Notre logiciel est facile à utiliser"</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -587,7 +586,7 @@ Maintenant transforme : "Notre logiciel est facile à utiliser"</div>
 À inclure : 10 ans en finance, reconversion entrepreneuriat 2022, fondateur de 2 startups.
 À EXCLURE : formules du type "passionné par", "j'ai toujours voulu", intro générique, conclusion avec call-to-action.
 Format : 3ème personne, 120-150 mots, ton sobre et factuel qui inspire confiance.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -618,7 +617,7 @@ Format : 3ème personne, 120-150 mots, ton sobre et factuel qui inspire confianc
 
 [Après avoir reçu les 3 versions :]
 La version [X] est la plus proche. Reprends-la et : [liste des modifications précises].</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -626,7 +625,8 @@ La version [X] est la plus proche. Reprends-la et : [liste des modifications pr�
 
       <!-- QUIZ M02 -->
       <div class="quiz-section">
-        <div class="quiz-question">🧠 Quiz Module 02 — Quelle est la meilleure façon de demander un email de relance client ?</div>
+        <div class="quiz-badge">🧠 Quiz du Module</div>
+        <div class="quiz-question"> Quelle est la meilleure façon de demander un email de relance client ?</div>
         <div class="quiz-options">
           <button class="quiz-option" onclick="checkAnswer(this,false,'q02')"><span class="quiz-opt-letter">A</span>"Écris un email de relance"</button>
           <button class="quiz-option" onclick="checkAnswer(this,false,'q02')"><span class="quiz-opt-letter">B</span>"Écris un bon email de relance professionnel"</button>
@@ -642,8 +642,8 @@ La version [X] est la plus proche. Reprends-la et : [liste des modifications pr�
   <!-- ═══════════════════ MODULE 03 ═══════════════════ -->
   <div class="module-panel" id="panel-2">
     <div class="module-header">
-      <div class="module-header-tag"><span class="module-big-num">MODULE 03 / 06</span><span class="module-tag intermediate">Intermédiaire</span></div>
-      <h2>Cas d'Usage <em>Concrets</em></h2>
+      <div class="module-header-tag"><span class="module-big-num">MODULE 03 / 06</span><span class="module-tag intermediate">🟡 Intermédiaire</span></div>
+      <h2 class="section-title">Cas d'Usage <em>Concrets</em></h2>
       <p>La théorie c'est bien, la pratique c'est mieux. Ce module passe en revue les 5 grands cas d'usage de Claude au quotidien, avec des workflows complets et des prompts prêts à l'emploi.</p>
     </div>
     <div class="lessons-wrap">
@@ -674,12 +674,12 @@ Objectif : obtenir un appel de 20min.
 Ton : chaleureux mais professionnel, pas insistant, pas culpabilisant.
 Format : objet + corps 80-100 mots max.
 Donne-moi 3 versions différentes.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Révision de Texte</div>
               <div class="prompt-text">Voici mon texte : [coller]. Améliore-le sur ces 3 axes uniquement : (1) supprime les répétitions, (2) renforce les verbes d'action, (3) coupe les phrases trop longues. Garde mon style et mes idées intacts.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -717,7 +717,7 @@ Code concerné : [coller le code]
 Ce que j'essaie de faire : [expliquer]
 
 Analyse l'erreur, explique pourquoi elle se produit, et donne-moi le code corrigé avec un commentaire sur chaque modification.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Revue de Code</div>
@@ -726,7 +726,7 @@ Analyse l'erreur, explique pourquoi elle se produit, et donne-moi le code corrig
 2. Identifie les 3 problèmes prioritaires (sécurité, performance, lisibilité)
 3. Propose le code refactorisé
 4. Explique chaque changement en une ligne</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -760,14 +760,14 @@ Extrais-en :
 2. Les 5 points essentiels sous forme de bullet points
 3. Ce qui me manque pour avoir une vue complète
 4. Les 3 actions concrètes que je devrais prendre suite à cette lecture</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Comparaison d'Options</div>
               <div class="prompt-text">Compare ces 3 options : [A], [B], [C].
 Critères de comparaison : coût, délai de mise en œuvre, risque, scalabilité.
 Présente sous forme de tableau, puis donne ta recommandation argumentée en 3 phrases.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -798,7 +798,7 @@ Génère 20 idées :
 - Les 10 premières : approches classiques, éprouvées
 - Les 10 suivantes : approches surprenantes, contre-intuitives, qui feraient lever un sourcil
 Présente chaque idée en 1 ligne. Pas d'explication pour l'instant.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Et Si...</div>
@@ -808,7 +808,7 @@ Explore ces 3 angles créatifs :
 2. "Et si on ciblait un public qu'on n'aurait jamais envisagé ?"
 3. "Et si on enlevait la fonctionnalité principale ?"
 Pour chaque angle, développe l'idée en 3-4 phrases.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -841,7 +841,7 @@ Aide-moi à décider en :
 2. Listant les risques que je n'ai peut-être pas considérés
 3. Me demandant 3 questions pour clarifier mes valeurs sur ce sujet
 Ne donne pas la réponse — aide-moi à penser.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Compte-Rendu de Réunion</div>
@@ -852,7 +852,7 @@ Génère un compte-rendu structuré avec :
 - Actions suivantes (avec responsable et deadline)
 - Points ouverts / questions sans réponse
 Format professionnel, 1 page max.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -860,7 +860,8 @@ Format professionnel, 1 page max.</div>
 
       <!-- QUIZ M03 -->
       <div class="quiz-section">
-        <div class="quiz-question">🧠 Quiz Module 03 — Pour débugger du code avec Claude, qu'est-il indispensable de lui fournir ?</div>
+        <div class="quiz-badge">🧠 Quiz du Module</div>
+        <div class="quiz-question"> Pour débugger du code avec Claude, qu'est-il indispensable de lui fournir ?</div>
         <div class="quiz-options">
           <button class="quiz-option" onclick="checkAnswer(this,false,'q03')"><span class="quiz-opt-letter">A</span>Juste le message d'erreur</button>
           <button class="quiz-option" onclick="checkAnswer(this,false,'q03')"><span class="quiz-opt-letter">B</span>Juste le code</button>
@@ -876,8 +877,8 @@ Format professionnel, 1 page max.</div>
   <!-- ═══════════════════ MODULE 04 ═══════════════════ -->
   <div class="module-panel" id="panel-3">
     <div class="module-header">
-      <div class="module-header-tag"><span class="module-big-num">MODULE 04 / 06</span><span class="module-tag advanced">Avancé</span></div>
-      <h2>Techniques <em>Avancées</em></h2>
+      <div class="module-header-tag"><span class="module-big-num">MODULE 04 / 06</span><span class="module-tag advanced">🔴 Avancé</span></div>
+      <h2 class="section-title">Techniques <em>Avancées</em></h2>
       <p>Vous maîtrisez les bases. Il est temps de passer à un niveau supérieur. Ces techniques transforment Claude d'un outil utile en un partenaire intellectuel de premier plan.</p>
     </div>
     <div class="lessons-wrap">
@@ -910,7 +911,7 @@ Avant de me donner des conseils, analyse d'abord :
 (2) Les erreurs courantes des nouveaux podcasteurs IA
 (3) Les niches sous-exploitées en français sur ce sujet
 Ensuite seulement, donne-moi un plan de lancement en 90 jours.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Raisonnement par Questions</div>
@@ -920,7 +921,7 @@ Avant de me donner ta réponse finale :
 2. Réponds à chacune en 2-3 phrases
 3. Identifie les tensions ou contradictions entre ces réponses
 4. Synthétise en une recommandation claire</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -947,12 +948,12 @@ Avant de me donner ta réponse finale :
             <div class="prompt-example">
               <div class="prompt-label">Méta-Prompt de Base</div>
               <div class="prompt-text">Tu es expert en prompt engineering pour Claude. Je veux utiliser Claude pour [décrire votre tâche récurrente]. Écris-moi le prompt idéal pour cette tâche — un prompt que je pourrai réutiliser en changeant juste [variable]. Explique brièvement pourquoi tu as structuré le prompt ainsi.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Améliorer Votre Propre Prompt</div>
               <div class="prompt-text">Voici le prompt que j'utilise actuellement : [coller votre prompt]. Les résultats sont [décrire ce qui ne va pas]. Réécris ce prompt pour obtenir de meilleurs résultats. Explique les 3 principaux changements que tu as apportés.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -983,12 +984,12 @@ Avant de me donner ta réponse finale :
 - Expert B : un entrepreneur qui a déjà échoué sur un projet similaire
 - Expert C : un early adopter enthousiaste mais réaliste
 Chaque expert donne son avis en 3-4 phrases. Reste dans leur personnage.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Simulation d'Entretien</div>
               <div class="prompt-text">Tu es un recruteur senior chez [entreprise cible] pour un poste de [poste]. Tu es exigeant, tu cherches à déstabiliser les candidats pour voir comment ils réagissent. Conduis un entretien en me posant des questions une par une. Commence.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -1019,7 +1020,7 @@ PHASE 1 : Propose-moi une structure détaillée avec les grandes sections. Ne r�
 
 [Après votre validation :]
 PHASE 2 : La structure est validée. Rédige maintenant la SECTION 1 seulement. Attends mon feedback avant de continuer.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -1057,12 +1058,12 @@ PHASE 2 : La structure est validée. Rédige maintenant la SECTION 1 seulement. 
     }
   ]
 }</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Output Tableau Markdown</div>
               <div class="prompt-text">Compare ces 5 outils IA [liste] sur les critères suivants : prix, facilité d'usage, cas d'usage principal, intégrations disponibles, support français. Présente en tableau Markdown, une ligne par outil.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -1070,7 +1071,8 @@ PHASE 2 : La structure est validée. Rédige maintenant la SECTION 1 seulement. 
 
       <!-- QUIZ M04 -->
       <div class="quiz-section">
-        <div class="quiz-question">🧠 Quiz Module 04 — Qu'est-ce que le Chain-of-Thought améliore principalement ?</div>
+        <div class="quiz-badge">🧠 Quiz du Module</div>
+        <div class="quiz-question"> Qu'est-ce que le Chain-of-Thought améliore principalement ?</div>
         <div class="quiz-options">
           <button class="quiz-option" onclick="checkAnswer(this,false,'q04')"><span class="quiz-opt-letter">A</span>La vitesse de réponse de Claude</button>
           <button class="quiz-option" onclick="checkAnswer(this,true,'q04')"><span class="quiz-opt-letter">B</span>La qualité du raisonnement sur des tâches complexes, en forçant Claude à décomposer le problème</button>
@@ -1086,8 +1088,8 @@ PHASE 2 : La structure est validée. Rédige maintenant la SECTION 1 seulement. 
   <!-- ═══════════════════ MODULE 05 ═══════════════════ -->
   <div class="module-panel" id="panel-4">
     <div class="module-header">
-      <div class="module-header-tag"><span class="module-big-num">MODULE 05 / 06</span><span class="module-tag advanced">Avancé</span></div>
-      <h2>Workflows & <em>Automatisation</em></h2>
+      <div class="module-header-tag"><span class="module-big-num">MODULE 05 / 06</span><span class="module-tag advanced">🔴 Avancé</span></div>
+      <h2 class="section-title">Workflows & <em>Automatisation</em></h2>
       <p>Vous ne voulez plus improviser à chaque utilisation. Ce module vous apprend à construire des systèmes : des templates réutilisables, des chaînes de prompts, et une bibliothèque personnelle qui démultiplie votre productivité.</p>
     </div>
     <div class="lessons-wrap">
@@ -1122,12 +1124,12 @@ FORMAT : [LONGUEUR / STRUCTURE / STYLE / CE A EVITER]
 CONTRAINTES : [LIMITES SPECIFIQUES]
 
 [DONNÉES OU MATIÈRE PREMIÈRE SI APPLICABLE]</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Créer un Template Personnalisé</div>
               <div class="prompt-text">Je fais régulièrement [décrire la tâche récurrente]. Crée-moi un template de prompt réutilisable pour cette tâche, avec des [VARIABLES] à remplir à chaque utilisation. Inclus un exemple rempli pour montrer comment l'utiliser.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -1163,7 +1165,7 @@ Génère 10 angles d'attaque possibles pour un article. Format : numéroté, 1 l
 ÉTAPE 2/6 — Plan
 J'ai choisi l'angle #[X] : "[texte de l'angle]".
 Crée un plan détaillé en 5-6 sections avec pour chaque section : titre + 3 sous-points à développer.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -1197,7 +1199,7 @@ Crée un plan détaillé en 5-6 sections avec pour chaque section : titre + 3 so
 - Mes préférences : [ce que vous aimez / n'aimez pas dans les réponses]
 
 Garde ce contexte en tête pour toute cette conversation.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -1238,7 +1240,7 @@ RÈGLES PERMANENTES :
 - Format par défaut : [vos préférences]
 
 Quand je te soumets un sujet, propose d'abord un angle, attends ma validation, puis rédige.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -1246,7 +1248,8 @@ Quand je te soumets un sujet, propose d'abord un angle, attends ma validation, p
 
       <!-- QUIZ M05 -->
       <div class="quiz-section">
-        <div class="quiz-question">🧠 Quiz Module 05 — Quelle est la meilleure approche pour rédiger un long article avec Claude ?</div>
+        <div class="quiz-badge">🧠 Quiz du Module</div>
+        <div class="quiz-question"> Quelle est la meilleure approche pour rédiger un long article avec Claude ?</div>
         <div class="quiz-options">
           <button class="quiz-option" onclick="checkAnswer(this,false,'q05')"><span class="quiz-opt-letter">A</span>"Rédige un article complet de 2000 mots sur [sujet]"</button>
           <button class="quiz-option" onclick="checkAnswer(this,false,'q05')"><span class="quiz-opt-letter">B</span>Lui donner le plus d'informations possible dans un seul message</button>
@@ -1262,8 +1265,8 @@ Quand je te soumets un sujet, propose d'abord un angle, attends ma validation, p
   <!-- ═══════════════════ MODULE 06 ═══════════════════ -->
   <div class="module-panel" id="panel-5">
     <div class="module-header">
-      <div class="module-header-tag"><span class="module-big-num">MODULE 06 / 06</span><span class="module-tag intermediate">Intermédiaire</span></div>
-      <h2>Éthique & <em>Meilleures Pratiques</em></h2>
+      <div class="module-header-tag"><span class="module-big-num">MODULE 06 / 06</span><span class="module-tag intermediate">🟡 Intermédiaire</span></div>
+      <h2 class="section-title">Éthique & <em>Meilleures Pratiques</em></h2>
       <p>La puissance appelle la responsabilité. Ce dernier module vous aide à utiliser Claude de façon éclairée, éthique et durable — pour en tirer le meilleur sans tomber dans les pièges.</p>
     </div>
     <div class="lessons-wrap">
@@ -1301,12 +1304,12 @@ Quand je te soumets un sujet, propose d'abord un angle, attends ma validation, p
 - [À VÉRIFIER] : tu recommandes de vérifier cette info
 
 Sois honnête plutôt que rassurant.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Anti-Hallucination</div>
               <div class="prompt-text">Pour les chiffres, dates et citations que tu utilises dans ta prochaine réponse : si tu n'es pas certain à 90%+, remplace par "environ", "approximativement" ou "à vérifier". Préfère admettre l'incertitude plutôt que d'inventer.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -1339,7 +1342,7 @@ Sois honnête plutôt que rassurant.</div>
             <div class="prompt-example">
               <div class="prompt-label">Créer sans Copier</div>
               <div class="prompt-text">Inspire-toi du style de [auteur / publication] — sa façon de structurer les arguments, son niveau de langage, son rythme — mais crée un contenu 100% original sur [sujet]. Ne cite pas, ne paraphrase pas : réinterprète l'approche.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -1368,12 +1371,12 @@ Sois honnête plutôt que rassurant.</div>
               <div class="prompt-label">Claude comme Sparring Partner</div>
               <div class="prompt-text">Voici mon opinion / ma réponse sur [sujet] : [votre texte].
 Ne la remplace pas. Challenge-la : quels arguments contra-intuitifs m'aideraient à la renforcer ? Quelles failles dois-je combler ? Quels exemples me manquent ?</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Apprendre, Pas Juste Obtenir</div>
               <div class="prompt-text">Au lieu de me donner la réponse directement, guide-moi pour y arriver par moi-même. Pose-moi les 3 questions clés que je devrais me poser, et donne-moi les pistes à explorer. Je veux comprendre le raisonnement, pas juste le résultat.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -1404,7 +1407,7 @@ Ne la remplace pas. Challenge-la : quels arguments contra-intuitifs m'aideraient
             <div class="prompt-example">
               <div class="prompt-label">Anonymisation de Données</div>
               <div class="prompt-text">J'ai anonymisé les données sensibles dans ce document. Les éléments remplacés sont : [Client A] = notre principal client, [Montant X] = le budget du projet, [Entreprise Z] = notre concurrent direct. Voici le document : [coller la version anonymisée].</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -1437,12 +1440,12 @@ Ne la remplace pas. Challenge-la : quels arguments contra-intuitifs m'aideraient
             <div class="prompt-example">
               <div class="prompt-label">Veille IA Personnalisée</div>
               <div class="prompt-text">Je suis [votre profil / métier]. Quelles sont les 5 avancées récentes en IA les plus pertinentes pour mon domaine ? Pour chacune : (1) ce que c'est en 2 lignes, (2) comment ça m'impacte concrètement, (3) ce que je devrais faire / tester maintenant.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
             <div class="prompt-example">
               <div class="prompt-label">Plan de Montée en Compétences IA</div>
               <div class="prompt-text">Je veux devenir vraiment compétent avec les outils IA dans mon domaine ([préciser]) en 3 mois. Crée-moi un plan d'action semaine par semaine : outils à tester, compétences à développer, ressources à consulter. Sois concret et actionnable.</div>
-              <button class="copy-btn" onclick="copyPrompt(this,event)">Copier</button>
+              <button class="copy-btn" onclick="copyPrompt(this,event)">📋 Copier ce prompt</button>
             </div>
           </div>
         </div></div>
@@ -1450,7 +1453,8 @@ Ne la remplace pas. Challenge-la : quels arguments contra-intuitifs m'aideraient
 
       <!-- QUIZ FINAL M06 -->
       <div class="quiz-section">
-        <div class="quiz-question">🧠 Quiz Final — Qu'est-ce qu'une "hallucination" de Claude ?</div>
+        <div class="quiz-badge">🧠 Quiz du Module</div>
+        <div class="quiz-question"> Qu'est-ce qu'une "hallucination" de Claude ?</div>
         <div class="quiz-options">
           <button class="quiz-option" onclick="checkAnswer(this,false,'q06')"><span class="quiz-opt-letter">A</span>Quand Claude refuse de répondre à une question</button>
           <button class="quiz-option" onclick="checkAnswer(this,false,'q06')"><span class="quiz-opt-letter">B</span>Quand Claude génère une réponse trop créative</button>
@@ -1461,21 +1465,23 @@ Ne la remplace pas. Challenge-la : quels arguments contra-intuitifs m'aideraient
       </div>
 
       <!-- FÉLICITATIONS -->
-      <div style="text-align:center;padding:3rem 0;border-top:1px solid var(--border);margin-top:2rem;">
-        <div style="font-size:3rem;margin-bottom:1rem;">🎓</div>
-        <h3 style="font-family:'DM Serif Display',serif;font-size:2rem;margin-bottom:0.8rem;">Félicitations !</h3>
-        <p style="color:var(--muted);font-size:1rem;line-height:1.7;max-width:500px;margin:0 auto 2rem;">Vous avez terminé les 6 modules. Vous faites maintenant partie des utilisateurs qui tirent vraiment le meilleur de Claude. La suite appartient à la pratique.</p>
-        <a href="#cheatsheet" class="btn-primary">Garder la Cheatsheet →</a>
+      <div class="congrats-box">
+        <div style="font-size:4rem;margin-bottom:1rem;">🎓</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:2.2rem;margin-bottom:1rem;color:var(--text);">Félicitations !</h3>
+        <p style="color:var(--text2);font-size:1.05rem;line-height:1.8;max-width:520px;margin:0 auto 2rem;font-weight:600;">Vous avez terminé les 6 modules ! Vous faites maintenant partie des utilisateurs qui tirent vraiment le meilleur de Claude. La suite appartient à la pratique 😊</p>
+        <a href="#cheatsheet" class="btn-primary">📋 Garder la Cheatsheet</a>
       </div>
 
     </div>
   </div><!-- /panel-5 -->
 </div><!-- /lecons -->
 
+<div class="section-divider"></div>
+
 <!-- TECHNIQUES VISUELLES -->
 <section id="techniques">
-  <div class="section-label">Boîte à Outils</div>
-  <h2>12 <em>Techniques</em> Essentielles</h2>
+  <div class="section-badge">Boîte à Outils</div>
+  <h2 class="section-title">12 <em>Techniques</em> Essentielles</h2>
   <p class="section-intro">Les patterns que les meilleurs utilisateurs de Claude appliquent tous les jours.</p>
   <div class="techniques-grid reveal">
     <div class="technique-card"><div class="technique-icon">🎭</div><h4>Persona Expert</h4><p>Assignez un rôle précis pour activer le bon registre de connaissances.</p><div class="prompt-text">"Tu es un avocat spécialisé en droit du travail français..."</div></div>
@@ -1493,12 +1499,14 @@ Ne la remplace pas. Challenge-la : quels arguments contra-intuitifs m'aideraient
   </div>
 </section>
 
+<div class="section-divider"></div>
+
 <!-- CHEATSHEET -->
 <section id="cheatsheet" style="max-width:1100px;">
-  <div class="section-label">Référence Rapide</div>
-  <h2>La <em>Cheatsheet</em></h2>
+  <div class="section-badge">Référence Rapide</div>
+  <h2 class="section-title">La <em>Cheatsheet</em></h2>
   <p class="section-intro">Gardez cette section sous la main. Les formules qui fonctionnent à chaque fois.</p>
-  <div class="cheatsheet reveal">
+  <div class="cheatsheet-grid reveal">
     <div class="cheat-item"><h5>🏁 Démarrer un Prompt</h5><p>"Tu es [rôle]. Ton style est [adjectifs]. Tu t'adresses à [audience]."</p></div>
     <div class="cheat-item"><h5>📏 Contrôler la Longueur</h5><p>"Réponds en [X mots/lignes]. Sois [concis/exhaustif/synthétique]."</p></div>
     <div class="cheat-item"><h5>🎨 Imposer un Style</h5><p>"Ton : [formel/décontracté]. Évite : [jargon/bullet points]."</p></div>
@@ -1516,11 +1524,11 @@ Ne la remplace pas. Challenge-la : quels arguments contra-intuitifs m'aideraient
 
 <footer>
   <div>
-    <div class="footer-logo">◆ CLAUDE MASTER</div>
-    <div class="footer-note" style="margin-top:0.5rem;">6 Modules · 28 Leçons · 6 Quiz · Cours complet</div>
+    <div class="footer-logo">🤖 Claude Master</div>
+    <div class="footer-note" style="margin-top:0.6rem;">6 Modules · 28 Leçons · 6 Quiz · Cours complet gratuit</div>
   </div>
   <div style="text-align:right;">
-    <div class="footer-note">La vraie maîtrise vient en <em style="color:var(--accent);">pratiquant</em>.<br>Créé avec l'aide de Claude — Anthropic 2025</div>
+    <div class="footer-note">La vraie maîtrise vient en <strong style="color:var(--accent);">pratiquant</strong> 😊<br>Créé avec l'aide de Claude — Anthropic 2025</div>
   </div>
 </footer>
 
@@ -1561,7 +1569,7 @@ Ne la remplace pas. Challenge-la : quels arguments contra-intuitifs m'aideraient
   function copyPrompt(btn,e){
     e.stopPropagation();
     const text=btn.previousElementSibling.textContent;
-    navigator.clipboard.writeText(text).then(()=>{ btn.textContent='✓ Copié'; btn.classList.add('copied'); setTimeout(()=>{ btn.textContent='Copier'; btn.classList.remove('copied'); },2000); });
+    navigator.clipboard.writeText(text).then(()=>{ btn.textContent='✅ Copié !'; btn.classList.add('copied'); setTimeout(()=>{ btn.textContent='📋 Copier ce prompt'; btn.classList.remove('copied'); },2000); });
   }
 
   // QUIZ
